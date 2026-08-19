@@ -21,7 +21,7 @@ Este desafio foi criado para entender como você pensa produto, arquitetura, des
 
 # Objetivo
 
-Acesse **https://www.budd.com.br**, baixe o aplicativo **budd User** e utilize a versão atual como referência para compreender o funcionamento do produto.
+Acesse **https://www.budd.com.br**, baixe o aplicativo **budd** e utilize a versão atual como referência para compreender o funcionamento do produto.
 
 Sua missão será **redesenhar a experiência do aplicativo**, propondo uma interface completamente renovada, moderna e consistente.
 
@@ -37,9 +37,9 @@ O desafio deverá ser concluído em até **5 dias corridos**.
 
 # Escopo
 
-O candidato deverá desenvolver **10 telas**, priorizando qualidade, consistência visual, usabilidade e atenção aos detalhes.
+O candidato deverá desenvolver **telas**, priorizando qualidade, consistência visual, usabilidade e atenção aos detalhes.
 
-Esperamos uma experiência completa, e não apenas um conjunto de telas isoladas.
+Esperamos uma experiência, e não apenas um conjunto de telas isoladas.
 
 ## Fluxo sugerido
 
@@ -74,7 +74,7 @@ Você poderá utilizar tons derivados, branco e tons neutros para compor a inter
 O projeto deverá ser desenvolvido utilizando:
 
 - React Native
-- Expo (preferencialmente)
+- Expo 
 
 ---
 
@@ -104,14 +104,14 @@ Ela deverá oferecer uma experiência moderna, dinâmica e intuitiva, inspirada 
 
 Esperamos uma interface viva, organizada e agradável de explorar.
 
-### A entrega deve conter, no mínimo (10 interfaces)
+### A entrega deve conter
 
 - Barra de pesquisa
 - Feed de bares
 - Destaques
 - Promoções
 - Eventos próximos
-- Navegação inferior redesenhada
+- Navegação inferior 
 - Micro animações
 - Feedback visual em todas as interações
 
@@ -155,7 +155,6 @@ Cada categoria deve ser facilmente identificada através de ícones consistentes
 - 🎟️ Ingressos
 - 🎵 Eventos
 - 🛎️ Serviços
-- 🚗 Estacionamento
 
 Cada card de produto deve apresentar:
 
@@ -178,23 +177,9 @@ Esperamos encontrar:
 
 - Foto
 - Nome
-- Histórico de pedidos
 - Bares favoritos
-- Configurações
 - Preferências
 - Recomendações personalizadas
-
----
-
-# Assistente Inteligente
-
-O budd está evoluindo para uma plataforma com experiências inteligentes(IA).
-
-Crie uma tela conceitual mostrando como seria um assistente capaz de ajudar o usuário a descobrir bares, eventos e produtos.
-
-Não é necessário implementar inteligência artificial real, apenas simule.
-
-Queremos avaliar como você imagina a interação entre uma interface tradicional e uma experiência assistida.
 
 ---
 
@@ -307,9 +292,6 @@ O projeto deverá conter:
 # Entregáveis
 
 Ao final do desafio, envie:
-
-- Link do repositório GitHub
-- Código-fonte
 - APK (opcional)
 - Vídeo de demonstração (máximo de 5 minutos)
 - README
