@@ -44,7 +44,24 @@ Atalhos: `npm run android` · `npm run ios`.
 | `npm run check` | Os três acima em sequência |
 | `npm run format` | Prettier em `src/` |
 
-> **Mapa no Android fora do Expo Go:** um build standalone (`eas build`) precisa de uma chave do Google Maps em `app.json` → `android.config.googleMaps.apiKey`. No Expo Go e no iOS (Apple Maps) funciona sem chave.
+### Gerar o APK
+
+O APK é gerado na nuvem pelo **EAS Build**, sem precisar de Android Studio. O perfil `preview` do [`eas.json`](eas.json) já está configurado para gerar um `.apk` instalável.
+
+```bash
+npx eas-cli@latest login                                        # conta gratuita em expo.dev
+npx eas-cli@latest build --platform android --profile preview   # leva ~10–20 min
+```
+
+Na primeira vez o EAS pergunta se pode criar o projeto e o keystore de assinatura: responda **sim** às duas. No fim ele mostra um link e um QR code para baixar o APK.
+
+**Mapa no APK:** no Android, o Google Maps exige uma chave de API em builds próprios (no Expo Go não). A chave nunca vai para o repositório: entra pela variável de ambiente `GOOGLE_MAPS_API_KEY`, lida em [`app.config.js`](app.config.js).
+
+```bash
+npx eas-cli@latest env:create --name GOOGLE_MAPS_API_KEY --value "<sua-chave>" --environment preview --visibility sensitive
+```
+
+Sem a chave, o app **não quebra**: a aba Mapa mostra um aviso e continua listando os bares próximos.
 
 ---
 

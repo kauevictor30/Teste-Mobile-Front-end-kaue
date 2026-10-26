@@ -16,6 +16,7 @@ import { searchBars } from '@/features/discovery/filtering';
 import { BarMarker } from '@/features/map/BarMarker';
 import { MapBarCard } from '@/features/map/MapBarCard';
 import { darkMapStyle } from '@/features/map/mapStyle';
+import { mapsAvailable } from '@/features/map/mapsAvailability';
 import { useNow } from '@/hooks/useNow';
 import { api } from '@/services/api';
 import { colors, spacing } from '@/theme/tokens';
@@ -109,39 +110,50 @@ export default function MapScreen() {
 
   return (
     <View style={styles.root}>
-      <MapView
-        ref={map}
-        style={StyleSheet.absoluteFill}
-        provider={PROVIDER_DEFAULT}
-        initialRegion={{ ...USER_LOCATION, latitudeDelta: 0.03, longitudeDelta: 0.03 }}
-        customMapStyle={darkMapStyle}
-        userInterfaceStyle="dark"
-        showsPointsOfInterests={false}
-        toolbarEnabled={false}
-        showsCompass={false}
-        mapPadding={{ top: insets.top + 120, bottom: bottom + 170, left: 0, right: 0 }}
-        accessibilityLabel="Mapa de bares próximos"
-      >
-        <Marker
-          coordinate={USER_LOCATION}
-          anchor={{ x: 0.5, y: 0.5 }}
-          tracksViewChanges={false}
-          accessibilityLabel="Você está aqui"
+      {mapsAvailable ? (
+        <MapView
+          ref={map}
+          style={StyleSheet.absoluteFill}
+          provider={PROVIDER_DEFAULT}
+          initialRegion={{ ...USER_LOCATION, latitudeDelta: 0.03, longitudeDelta: 0.03 }}
+          customMapStyle={darkMapStyle}
+          userInterfaceStyle="dark"
+          showsPointsOfInterests={false}
+          toolbarEnabled={false}
+          showsCompass={false}
+          mapPadding={{ top: insets.top + 120, bottom: bottom + 170, left: 0, right: 0 }}
+          accessibilityLabel="Mapa de bares próximos"
         >
-          <View style={styles.userHalo}>
-            <View style={styles.userDot} />
-          </View>
-        </Marker>
-        {visible.map((b) => (
-          <BarMarker
-            key={b.id}
-            bar={b}
-            selected={b.id === selected?.id}
-            hasEvent={barsWithEvent.has(b.id)}
-            onPress={onMarkerPress}
-          />
-        ))}
-      </MapView>
+          <Marker
+            coordinate={USER_LOCATION}
+            anchor={{ x: 0.5, y: 0.5 }}
+            tracksViewChanges={false}
+            accessibilityLabel="Você está aqui"
+          >
+            <View style={styles.userHalo}>
+              <View style={styles.userDot} />
+            </View>
+          </Marker>
+          {visible.map((b) => (
+            <BarMarker
+              key={b.id}
+              bar={b}
+              selected={b.id === selected?.id}
+              hasEvent={barsWithEvent.has(b.id)}
+              onPress={onMarkerPress}
+            />
+          ))}
+        </MapView>
+      ) : (
+        <View style={styles.noMap} accessibilityRole="alert">
+          <Text variant="h3" align="center">
+            Mapa indisponível nesta build
+          </Text>
+          <Text variant="caption" color={colors.text3} align="center">
+            Configure GOOGLE_MAPS_API_KEY para ver o mapa. Os bares próximos continuam abaixo.
+          </Text>
+        </View>
+      )}
 
       <View style={[styles.top, { paddingTop: insets.top + spacing.xs }]} pointerEvents="box-none">
         <View style={styles.searchRow}>
@@ -216,6 +228,7 @@ export default function MapScreen() {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: '#0E100E' },
+  noMap: { ...StyleSheet.absoluteFill, justifyContent: 'center', paddingHorizontal: spacing.xxl, gap: spacing.xs },
   top: { position: 'absolute', top: 0, left: 0, right: 0, gap: spacing.sm },
   searchRow: { flexDirection: 'row', gap: 10, paddingHorizontal: spacing.md },
   squareBtn: { borderRadius: 16, backgroundColor: 'rgba(20,22,20,0.96)' },
